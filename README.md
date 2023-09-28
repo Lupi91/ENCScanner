@@ -28,15 +28,15 @@ Scan drive or directory for:
 Script in action
 ![](/Demo/02.png?raw=true")
 
-The VeraCrypt container was successfully detected - be aware that there can be a lot of false-positives like cache-files in this example from chrome...
+The VeraCrypt container was successfully detected - be aware that there can be a lot of false-positives like cache-files in this example from chrome...<br>
 ![](/Demo/04.png?raw=true")
 
-The recovery keys were successfully detected.
+The recovery keys were successfully detected.<br>
 ![](/Demo/05.png?raw=true")
 
-All disk image files were successfully detected.
+All disk image files were successfully detected.<br>
 ![](/Demo/06.png?raw=true")
 
-The original BitLocker recovery key file was successfully copied.
+The original BitLocker recovery key file was successfully copied.<br>
 ![](/Demo/07.png?raw=true")
 

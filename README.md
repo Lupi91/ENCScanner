@@ -24,4 +24,10 @@ This is my demo folder containing:
 - VeraCrypt container
 - Original BitLocker recovery key file
 - 2 TXT-Files containing a BitLocker recovery key
-![Demo folder](/Demo/01.png?raw=true "title")
+![](/Demo/01.png?raw=true)
+
+Script in action
+![](/Demo/02.png?raw=true")
+
+Results are stored to csv-files
+![](/Demo/03.png?raw=true")

@@ -28,7 +28,7 @@ Scan drive or directory for:
 Script in action
 ![](/Demo/02.png?raw=true")
 
-The VeraCrypt container was successfully detected - be aware that there can be a lot of false-positives like cache-files...
+The VeraCrypt container was successfully detected - be aware that there can be a lot of false-positives like cache-files in this example from chrome...
 ![](/Demo/04.png?raw=true")
 
 The recovery keys were successfully detected.

@@ -25,8 +25,11 @@ Scan drive or directory for:
 - Two txt-files containing a BitLocker recovery key
 ![](/Demo/01.png?raw=true)
 
-Script in action
+Script in action<br>
 ![](/Demo/02.png?raw=true")
+
+Results are stored to csv, key files are copied to the result folder.<br>
+![](/Demo/03.png?raw=true")
 
 The VeraCrypt container was successfully detected - be aware that there can be a lot of false-positives like cache-files in this example from chrome...<br>
 ![](/Demo/04.png?raw=true")

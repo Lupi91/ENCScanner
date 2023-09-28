@@ -4,13 +4,11 @@ The ENCScanner is designed to perform the following tasks:
 - Detection of encrypted containers
 - Detection of disk image files
 
-
 ## Workflow
-**Identify BitLocker key files**
-- Check filename
-- RegEx pattern search on TXT-Files
+**Detection of BitLocker key files**
+- Check filename, RegEx pattern search on TXT files
 
-**Identify encrypted containers or disk image files**
+**Detection of encrypted containers or disk image files**
 1) filesize divided by 512 = whole number?
 2) mime-type = "application/octet-stream"?
 3) Entropy value > 7.9 ?
@@ -19,16 +17,17 @@ The ENCScanner is designed to perform the following tasks:
 => disk image file
 
 ## Demo
+Content of the demo folder:
 - disk image files, two of them encrypted using BitLocker
 - VeraCrypt container
 - Original BitLocker recovery key file
-- Two txt-files containing a BitLocker recovery key
+- Two TXT files containing one or multiple BitLocker recovery keys
 ![](/Demo/01.png?raw=true)
 
 Script in action<br>
 ![](/Demo/02.png?raw=true")
 
-The results of the scanning process are stored in a CSV file, and BitLocker recovery key files are copied to a designated result folder.<br>
+The results of the scanning process are stored in a CSV file. BitLocker recovery key files are copied to the result folder.<br>
 ![](/Demo/03.png?raw=true")
 
 The VeraCrypt container was successfully detected - be aware that there can be a lot of false-positives like cache-files in this example from chrome...<br>

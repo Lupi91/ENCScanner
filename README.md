@@ -19,15 +19,24 @@ Scan drive or directory for:
 => disk image file
 
 ## Demo
-This is my demo folder containing:
-- 5 disk image files, 2 of them encrypted using BitLocker
+- disk image files, two of them encrypted using BitLocker
 - VeraCrypt container
 - Original BitLocker recovery key file
-- 2 TXT-Files containing a BitLocker recovery key
+- Two txt-files containing a BitLocker recovery key
 ![](/Demo/01.png?raw=true)
 
 Script in action
 ![](/Demo/02.png?raw=true")
 
-Results are stored to csv-files
-![](/Demo/03.png?raw=true")
+The VeraCrypt container was successfully detected - be aware that there can be a lot of false-positives like cache-files...
+![](/Demo/04.png?raw=true")
+
+The recovery keys were successfully detected.
+![](/Demo/05.png?raw=true")
+
+All disk image files were successfully detected.
+![](/Demo/06.png?raw=true")
+
+The original BitLocker recovery key file was successfully copied.
+![](/Demo/07.png?raw=true")
+

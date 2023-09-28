@@ -6,11 +6,11 @@ Scan drive or directory for:
 
 
 ## Workflow
-** Identify BitLocker key files **
+**Identify BitLocker key files**
 - Check filename
 - RegEx pattern search on TXT-Files
 
-** Identify encrypted containers or disk image files **
+**Identify encrypted containers or disk image files**
 1) filesize divided by 512 = whole number?
   2) mime-type = "application/octet-stream"?
     3) Entropy value > 7.9 ?

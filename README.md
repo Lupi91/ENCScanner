@@ -1,8 +1,8 @@
 # ENCScanner
-Scan drive or directory for:
-- BitLocker recovery key files
-- encrypted containers
-- disk image files
+The ENCScanner is designed to perform the following tasks:
+- Detection of BitLocker recovery keys and key files
+- Detection of encrypted containers
+- Detection of disk image files
 
 
 ## Workflow
@@ -28,7 +28,7 @@ Scan drive or directory for:
 Script in action<br>
 ![](/Demo/02.png?raw=true")
 
-Results are stored to csv, key files are copied to the result folder.<br>
+The results of the scanning process are stored in a CSV file, and BitLocker recovery key files are copied to a designated result folder.<br>
 ![](/Demo/03.png?raw=true")
 
 The VeraCrypt container was successfully detected - be aware that there can be a lot of false-positives like cache-files in this example from chrome...<br>

@@ -24,8 +24,9 @@ def collect(input_dir):
     for dirpath, dirnames, filenames in os.walk(input_dir):
         for filename in [f for f in filenames]:
             f = os.path.join(dirpath, filename)
-            FILES.append(f)
-            print('%d' % len(FILES), end='\r')
+            if os.path.isfile(f):
+                FILES.append(f)
+                print('%d' % len(FILES), end='\r')
     return FILES
 
 

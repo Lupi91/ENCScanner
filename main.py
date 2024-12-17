@@ -18,15 +18,45 @@ from tqdm import tqdm       # pip install tqdm
 pattern = re.compile(r"\d{6}-\d{6}-\d{6}-\d{6}-\d{6}-\d{6}-\d{6}-\d{6}")
 
 
-# return a list of all files in the target directory
-def collect(input_dir):
+   
+# Custom os.scandir() based walker that includes hidden files and directories
+def scandir_walk(top, include_hidden=False):
+    dirs, nondirs = [], []
+    try:
+        # Scan the directory
+        with os.scandir(top) as it:
+            for entry in it:
+                if entry.is_dir(follow_symlinks=False):
+                    dirs.append(entry.name)
+                else:
+                    nondirs.append(entry.name)
+    except PermissionError:
+        # Skip directories for which we don't have permission
+        return
+
+    # Yield the current directory's files and directories
+    yield top, dirs, nondirs
+
+    # Recursively walk through each subdirectory
+    for dirname in dirs:
+        new_path = os.path.join(top, dirname)
+        # Recursively walk the subdirectories
+        yield from scandir_walk(new_path, include_hidden=include_hidden)
+
+
+
+# Function to collect file paths, including hidden directories (if specified)
+def collect(input_path, include_hidden=True):
     FILES = []
-    for dirpath, dirnames, filenames in os.walk(input_dir):
-        for filename in [f for f in filenames]:
-            f = os.path.join(dirpath, filename)
-            if os.path.isfile(f):
-                FILES.append(f)
-                print('%d' % len(FILES), end='\r')
+    # Use tqdm for a progress bar
+    with tqdm(desc="Collecting files", unit="") as pbar:
+        try:
+            for root, dirs, files in scandir_walk(input_path, include_hidden=include_hidden):
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    FILES.append(file_path)
+                    pbar.update(1)
+        except PermissionError: pass
     return FILES
 
 
@@ -189,19 +219,19 @@ def main(i, e, cpu):
             except Exception as e:
                 print(e)
                 continue
-        print(f"Key Files saved to '{os.getcwd()}\{out_path_key}'")
+        print(f"Key Files saved to '{os.getcwd()}\\{out_path_key}'")
     if any(TXT_FILES):
         write_csv(TXT_FILES, f"{out_path}/BitLocker_regex_key_hits.csv")
-        print(f"Results written to '{os.getcwd()}\{out_path}\BitLocker_regex_key_hits.csv'")
+        print(f"Results written to '{os.getcwd()}\\{out_path}\\BitLocker_regex_key_hits.csv'")
     if any(ENTROPY_HITS):
         write_csv(ENTROPY_HITS, f"{out_path}/entropy_hits.csv")
-        print(f"Results written to '{os.getcwd()}\{out_path}\entropy_hits.csv'")
+        print(f"Results written to '{os.getcwd()}\\{out_path}\\entropy_hits.csv'")
     if any(DISKIMG_HITS):
         write_csv(DISKIMG_HITS, f"{out_path}/diskimage_hits.csv")
-        print(f"Results written to '{os.getcwd()}\{out_path}\diskimage_hits.csv'")
+        print(f"Results written to '{os.getcwd()}\\{out_path}\\diskimage_hits.csv'")
     if any(ERRORS):
         write_csv(ERRORS, f"{out_path}/errors.csv")
-        print(f"Errors written to '{os.getcwd()}\{out_path}\errors.csv'")
+        print(f"Errors written to '{os.getcwd()}\\{out_path}\\errors.csv'")
     x = input("\nDone! Press any key to quit...")
 
 
@@ -209,15 +239,14 @@ if __name__ == "__main__":
     freeze_support()
     print("   ____ _  __ _____ ____                               ")
     print("  / __// |/ // ___// __/____ ___ _ ___   ___  ___  ____")
-    print(" / _/ /    // /__ _\ \ / __// _ `// _ \ / _ \/ -_)/ __/")
-    print("/___//_/|_/ \___//___/ \__/ \_,_//_//_//_//_/\__//_/   ")
+    print(" / _/ /    // /__ _| | / __// _ `// _ ] / _ ]/ -_)/ __/")
+    print("/___//_/|_/|____//___/[ __/[ _,_//_//_//_//_/[__//_/   ")
     print("")
     print("by Kantonspolizei Uri, Spezialdienste, marco.luperto@ur.ch\n")
     print("Scan drive/directory for:")
     print("- BitLocker recovery key files")
     print("- encrypted files")
     print("- virtual hard disk files\n")    
-    
     source_dir = input("Select source ('F:\\'): ")
     if source_dir == "":
         sys.exit("Invalid argument: empty source!")

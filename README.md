@@ -4,6 +4,9 @@ The ENCScanner is designed to perform the following tasks:
 - Detection of encrypted containers
 - Detection of disk image files
 
+## Download
+You can download the windows executable from the [Releases page](https://github.com/Lupi91/ENCScanner/releases/latest).
+
 ## Workflow
 **Detection of BitLocker key files**
 - Check filename, RegEx pattern search on TXT files
